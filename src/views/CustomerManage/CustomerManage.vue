@@ -96,12 +96,16 @@
         layout="total, prev, pager, next, jumper"
         :total="customers.length"></el-pagination>
     </el-main>
+    <canvas-view></canvas-view>
   </div>
 </template>
 
 <script>
+import CanvasView from '@/components/canvas'
 export default {
-  components: {},
+  components: {
+    CanvasView
+  },
   data () {
     return {
       query: '',
