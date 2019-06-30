@@ -1,6 +1,14 @@
 <template>
   <div class="amap">
     <div id="container"></div>
+    <div class="control">
+      <span :class="{active:currentControl==='standar'}" @click='showStandardMap("standar")'>地图</span>
+      <span :class="{active:currentControl==='satellite'}" @click='showSatelliteMap("satellite")'>卫星</span>
+      <span :class="{active:currentControl==='ranging'}" @click='hnadleRanging("ranging")'>
+        测距
+        <!-- <img src="@/assets/img/data/尺子.png" alt=""> -->
+      </span>
+    </div>
   </div>
 </template>
 
@@ -10,7 +18,10 @@ export default {
   components: {},
   data () {
     return {
-      map: null
+      map: null,
+      ranging: null, // 测距
+      satellite: null,
+      currentControl: 'standar'
     }
   },
   computed: {},
@@ -29,6 +40,27 @@ export default {
       AMap.plugin(['AMap.Scale'], () => {
         this.map.addControl(new AMap.Scale())
       })
+      // 默认样式测距
+      this.ranging = new AMap.RangingTool(this.map)
+    },
+    // 测距
+    hnadleRanging (value) {
+      this.currentControl = value
+      this.ranging.turnOn()
+    },
+    // 显示标准地图
+    showStandardMap (value) {
+      this.currentControl = value
+      this.satellite.setMap(null)
+      this.satellite = null
+    },
+    // 显示卫星地图
+    showSatelliteMap (value) {
+      this.currentControl = value
+      this.satellite = new AMap.TileLayer.Satellite({
+        map: this.map
+      })
+      this.satellite.setMap(this.map)
     }
   },
   created () {},
@@ -41,8 +73,31 @@ export default {
 </script>
 <style lang="scss" scoped>
 .amap {
+  position: relative;
   #container {
     height: 500px;
+  }
+  .control {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(214,214,214,.9);
+    height: 30px;
+    line-height: 30px;
+    color: black;
+    font-size: 14px;
+    span {
+      float: left;
+      font-weight: bold;
+      padding: 0 10px;
+      cursor: pointer;
+      &.active {
+        background: rgba(205,216,251,1);
+      }
+      img {
+        height: 30px;
+      }
+    }
   }
 }
 </style>

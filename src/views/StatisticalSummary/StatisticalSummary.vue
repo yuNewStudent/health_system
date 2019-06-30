@@ -101,15 +101,12 @@
         layout="total, prev, pager, next, jumper"
         :total="customers.length"></el-pagination>
     </el-main>
-    <map-view></map-view>
   </div>
 </template>
 
 <script>
-import MapView from '@/components/amap'
 export default {
   components: {
-    MapView
   },
   data () {
     return {

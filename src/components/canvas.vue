@@ -41,7 +41,6 @@ export default {
     touchend (e) {
     },
     drawLine () {
-      
     },
     getPosition (e) {
       let x = e.touches[0].clientX - this.canvasLeft
