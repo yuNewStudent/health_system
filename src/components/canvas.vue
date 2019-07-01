@@ -4,8 +4,12 @@
       id='canvas'
       ref='canvas'
       @touchstart='touchstart'
-      @touchmove='touchmove'
-      @touchend='touchend'></canvas>
+      @touchmove='touchmove'></canvas>
+    <div class="control">
+      <span @click='clearCanvas'>清除</span>
+      <span @click='savePic'>保存</span>
+    </div>
+    <img :src="imgSrc" alt="">
   </div>
 </template>
 
@@ -17,7 +21,8 @@ export default {
       canvasLeft: 0,
       canvasTop: 0,
       lines: [],
-      ctx: null
+      ctx: null,
+      imgSrc: ''
     }
   },
   computed: {},
@@ -33,19 +38,28 @@ export default {
       this.ctx.beginPath()
       this.ctx.moveTo(position.x, position.y)
     },
+    // click () {
+    //   alert('click')
+    // },
     touchmove (e) {
       const position = this.getPosition(e)
       this.ctx.lineTo(position.x, position.y)
       this.ctx.stroke()
     },
-    touchend (e) {
-    },
-    drawLine () {
-    },
     getPosition (e) {
       let x = e.touches[0].clientX - this.canvasLeft
       let y = e.touches[0].clientY - this.canvasTop
       return { x, y }
+    },
+    // 清楚
+    clearCanvas () {
+      this.ctx.clearRect(0, 0, 300, 150)
+    },
+    // 保存
+    savePic () {
+      var dataURL = this.$refs.canvas.toDataURL()
+      this.imgSrc = dataURL
+      console.log(dataURL)
     }
   },
   mounted () {
@@ -59,7 +73,7 @@ export default {
 .canvas{
   #canvas {
     width: 300px;
-    height: 300px;
+    height: 150px;
     border: 1px solid gray;
   }
 }

@@ -118,6 +118,8 @@ export default {
   },
   computed: {},
   methods: {
+    // 选择器改变时触发
+    handleSelectionChange () {},
     // 翻页
     handleCurrentChange () {},
     // 修改table header的背景色
