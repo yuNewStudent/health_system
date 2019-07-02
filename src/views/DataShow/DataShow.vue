@@ -14,7 +14,7 @@
         </div>
       </el-col>
       <el-col :span="12">
-        <map-view class="map_wrapper"></map-view>
+        <map-view :control='isShowControl' class="map_wrapper"></map-view>
         <div class="middle_info">
           <el-select v-model="value" placeholder="请选择服务中心">
             <el-option
@@ -55,6 +55,7 @@ export default {
         line: 'line',
         pie: 'pie'
       },
+      isShowControl: true,
       options: [
         {
           label: '服务中心A',

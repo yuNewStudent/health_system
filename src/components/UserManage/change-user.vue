@@ -1,51 +1,20 @@
 <template>
   <message-box
     class="change_service"
-    @closeChangeBox='closeChangeService'
+    @closeChangeBox='closeChangeUser'
     :title='title'>
-    <div class="input_wrapper" v-show='isfirst'>
-      <div class="servicen_num">
-        <label for="">请输入服务中心编号</label>
+    <div class="input_wrapper">
+      <div>
+        <label for="">请输入姓名</label>
         <el-input></el-input>
       </div>
-      <div class="servicen_num">
-        <label for="">请输入服务中心名称</label>
+      <div>
+        <label for="">请输入电话号码</label>
         <el-input></el-input>
       </div>
-      <div class="servicen_num">
-        <label for="">请输入服务中心地址</label>
+      <div>
+        <label for="">请选择岗位</label>
         <el-input></el-input>
-      </div>
-      <div class="servicen_num">
-        <label for="">请输入服务中心人数</label>
-        <el-input></el-input>
-      </div>
-    </div>
-    <div class="input_wrapper" v-show='!isfirst'>
-      <div class="servicen_num">
-        <label for="">请选择项目负责人</label>
-        <el-select size="large" v-model="value" clearable placeholder="请选择项目负责人">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
-      <div class="servicen_num">
-        <label for="">请选择中心负责人</label>
-        <el-select size="large" v-model="value" clearable placeholder="请选择项目负责人">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
-      <div class="servicen_num">
-        <label for="">请选择回访负责人</label>
         <el-select size="large" v-model="value" clearable placeholder="请选择项目负责人">
           <el-option
             v-for="item in options"
@@ -56,11 +25,7 @@
         </el-select>
       </div>
     </div>
-    <div class="footer" v-if='isfirst'>
-      <span @click='handleNext'>下一步</span>
-    </div>
-    <div class="footer" v-else>
-      <span @click='handleBack'>上一步</span>
+    <div class="footer">
       <span @click='handleSave'>确定</span>
     </div>
   </message-box>
@@ -87,25 +52,17 @@ export default {
         }
       ],
       value: '',
-      serviceInfo: {}
+      userInfo: {}
     }
   },
   computed: {},
   methods: {
-    closeChangeService () {
-      this.$emit('closeChangeService')
-    },
-    // 进行下一步填写
-    handleNext () {
-      this.isfirst = false
-    },
-    // 返回上一步填写
-    handleBack () {
-      this.isfirst = true
+    closeChangeUser () {
+      this.$emit('closeChangeUser')
     },
     // 保存
     handleSave () {
-      this.$emit('closeChangeService', this.serviceInfo)
+      this.$emit('closeChangeUser', this.userInfo)
     }
   },
   created () {}
@@ -161,6 +118,7 @@ export default {
             line-height: 30px;
           }
           .el-select {
+            margin-top: 10px;
             border-radius:4px;
             width: 100%;
           }

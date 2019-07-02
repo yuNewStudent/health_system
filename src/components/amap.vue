@@ -4,7 +4,7 @@
     <div class="control" v-if='control'>
       <span :class="{active:currentControl==='standar'}" @click='showStandardMap("standar")'>地图</span>
       <span :class="{active:currentControl==='satellite'}" @click='showSatelliteMap("satellite")'>卫星</span>
-      <span :class="{active:currentControl==='ranging'}" @click='hnadleRanging("ranging")'>
+      <span :class="{active:isRanging}" @click='hnadleRanging()'>
         测距
         <!-- <img src="@/assets/img/data/尺子.png" alt=""> -->
       </span>
@@ -21,6 +21,7 @@ export default {
     return {
       map: null,
       ranging: null, // 测距
+      isRanging: false,
       satellite: null,
       currentControl: 'standar'
     }
@@ -45,9 +46,14 @@ export default {
       this.ranging = new AMap.RangingTool(this.map)
     },
     // 测距
-    hnadleRanging (value) {
-      this.currentControl = value
-      this.ranging.turnOn()
+    hnadleRanging () {
+      if (!this.isRanging) {
+        this.ranging.turnOn()
+        this.isRanging = true
+      } else {
+        this.ranging.turnOff()
+        this.isRanging = false
+      }
     },
     // 显示标准地图
     showStandardMap (value) {

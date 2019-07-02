@@ -65,7 +65,9 @@
         :total="serviceCenters.length"></el-pagination>
     </el-main>
     <change-service
-      v-if='isShowChangeService'></change-service>
+      v-if='isShowChangeService'
+      @closeChangeService='closeChangeService'
+      :title='title.add'></change-service>
   </div>
 </template>
 
@@ -79,6 +81,10 @@ export default {
     return {
       serviceCenters: [],
       isShowChangeService: false,
+      title: {
+        add: '新增服务中心',
+        editor: '修改服务中心'
+      },
       // 分页
       currentPage: 1,
       paginationData: [],
@@ -89,6 +95,10 @@ export default {
   methods: {
     // 选择器变化
     handleSelectionChange () {},
+    // 隐藏服务中心编辑弹窗
+    closeChangeService () {
+      this.isShowChangeService = false
+    },
     // 修改table header的背景色
     tableHeaderColor ({row, column, rowIndex, columnIndex}) {
       if (rowIndex === 0) {

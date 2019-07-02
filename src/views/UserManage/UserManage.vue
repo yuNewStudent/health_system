@@ -11,11 +11,11 @@
           </span>
       </div>
       <div class="btns">
-        <div class="import">
+        <!-- <div class="import">
           <img src="@/assets/img/cust/导入ic .png" alt="">
           <span>新增服务中心</span>
-        </div>
-        <div class="import">
+        </div> -->
+        <div class="import" @click='isShowChangeUser=!isShowChangeUser'>
           <img src="@/assets/img/cust/导入ic .png" alt="">
           <span>新增用户</span>
         </div>
@@ -78,19 +78,23 @@
         layout="total, prev, pager, next, jumper"
         :total="users.length"></el-pagination>
     </el-main>
+    <change-user
+      v-if='isShowChangeUser'
+      @closeChangeUser='addUser'
+      :title='title.add'></change-user>
   </div>
 </template>
 
 <script>
+import ChangeUser from '@/components/UserManage/change-user'
 export default {
-  components: {},
+  components: {
+    ChangeUser
+  },
   data () {
     return {
       query: '',
-      // 分页
-      currentPage: 1,
-      paginationData: [],
-      pageSize: 8,
+      isShowChangeUser: false,
       users: [
         {
           name: 'yujian',
@@ -127,11 +131,23 @@ export default {
           contact: 12345678,
           position: '前端'
         }
-      ]
+      ],
+      title: {
+        add: '新增用户',
+        editor: '修改用户信息'
+      },
+      // 分页
+      currentPage: 1,
+      paginationData: [],
+      pageSize: 8
     }
   },
   computed: {},
   methods: {
+    // 新增用户
+    addUser () {
+      this.isShowChangeUser = false
+    },
     // 翻页
     handleCurrentChange () {},
     // 修改table header的背景色
