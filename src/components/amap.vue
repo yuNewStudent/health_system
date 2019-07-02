@@ -1,7 +1,7 @@
 <template>
   <div class="amap">
     <div id="container"></div>
-    <div class="control">
+    <div class="control" v-if='control'>
       <span :class="{active:currentControl==='standar'}" @click='showStandardMap("standar")'>地图</span>
       <span :class="{active:currentControl==='satellite'}" @click='showSatelliteMap("satellite")'>卫星</span>
       <span :class="{active:currentControl==='ranging'}" @click='hnadleRanging("ranging")'>
@@ -15,6 +15,7 @@
 <script>
 import AMap from 'AMap'
 export default {
+  props: ['control'],
   components: {},
   data () {
     return {
@@ -37,9 +38,9 @@ export default {
         zoom: 15
       })
       // 添加缩放标尺控件
-      AMap.plugin(['AMap.Scale'], () => {
-        this.map.addControl(new AMap.Scale())
-      })
+      // AMap.plugin(['AMap.Scale'], () => {
+      //   this.map.addControl(new AMap.Scale())
+      // })
       // 默认样式测距
       this.ranging = new AMap.RangingTool(this.map)
     },
@@ -73,9 +74,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .amap {
-  position: relative;
+  width: 100%;
+  height: 100%;
   #container {
-    height: 500px;
+    width: 100%;
+    height: 100%;
   }
   .control {
     position: absolute;

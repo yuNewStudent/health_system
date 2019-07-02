@@ -21,6 +21,12 @@ export default {
 input {
   height: 45px;
 }
+.amap-logo {
+  display: none !important;
+}
+.amap-copyright {
+  opacity: 0;
+}
 /* .el-input-group__append {
   background: #002496;
   border: 1px solid #002496;

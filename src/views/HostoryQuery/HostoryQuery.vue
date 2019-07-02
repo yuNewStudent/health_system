@@ -40,16 +40,16 @@
           width="50">
         </el-table-column>
         <el-table-column
-          label="岗位编号">
+          label="档案编号">
           <template slot-scope="scope">{{ scope.row.date }}</template>
         </el-table-column>
         <el-table-column
           prop="name"
-          label="岗位名称">
+          label="姓名">
         </el-table-column>
         <el-table-column
           prop="address"
-          label="姓名">
+          label="性别">
         </el-table-column>
         <el-table-column
           prop="address"
@@ -61,10 +61,17 @@
         </el-table-column>
         <el-table-column
           prop="address"
-          label="联系方式">
+          label="回访负责人">
         </el-table-column>
         <el-table-column
-          label="操作">
+          prop="address"
+          label="上次回访时间">
+        </el-table-column>
+        <el-table-column
+          label="回访记录">
+          <template slot-scope="scope">
+            <img src="@/assets/img/home/查看IC.png" alt="">
+          </template>
         </el-table-column>
       </el-table>
       <el-pagination

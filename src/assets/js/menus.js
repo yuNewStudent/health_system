@@ -17,7 +17,7 @@ const menus = [
   },
   {
     title: '客户管理',
-    name: 'CustomerManage',
+    name: 'Customer',
     icon: require('@/assets/img/home/客户管理IC.png')
   },
   {
@@ -26,9 +26,14 @@ const menus = [
     icon: require('@/assets/img/home/统计汇总IC.png')
   },
   {
-    title: '随访指导',
+    title: '回访指导',
     name: 'VisitGuide',
     icon: require('@/assets/img/home/回访指导IC.png')
+  },
+  {
+    title: '后期随访',
+    name: 'LateVisit',
+    icon: require('@/assets/img/home/后期随访IC.png')
   },
   {
     title: '历史查询',

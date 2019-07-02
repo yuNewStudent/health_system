@@ -5,8 +5,11 @@ const Home = () => import('@/views/Home')
 const OperationalLog = () => import('@/views/OperationalLog/OperationalLog')
 const DataShow = () => import('@/views/DataShow/DataShow')
 const CustomerManage = () => import('@/views/CustomerManage/CustomerManage')
+const Customer = () => import('@/views/CustomerManage/index')
+const ServiceCenter = () => import('@/views/CustomerManage/ServiceCenter')
 const StatisticalSummary = () => import('@/views/StatisticalSummary/StatisticalSummary')
 const VisitGuide = () => import('@/views/VisitGuide/VisitGuide')
+const LateVisit = () => import('@/views/LateVisit/LateVisit')
 const HostoryQuery = () => import('@/views/HostoryQuery/HostoryQuery')
 const UserManage = () => import('@/views/UserManage/UserManage')
 
@@ -30,9 +33,22 @@ export default new Router({
           component: DataShow
         },
         {
-          path: '/customermanage',
-          name: 'CustomerManage',
-          component: CustomerManage
+          path: '/customer',
+          name: 'Customer',
+          component: Customer,
+          redirect: '/customermanage/index',
+          children: [
+            {
+              path: '/customermanage/index',
+              name: 'CustomerManage',
+              component: CustomerManage
+            },
+            {
+              path: '/customermanage/servicecenter',
+              name: 'ServiceCenter',
+              component: ServiceCenter
+            }
+          ]
         },
         {
           path: '/statisticalsummary',
@@ -43,6 +59,11 @@ export default new Router({
           path: '/visitguide',
           name: 'VisitGuide',
           component: VisitGuide
+        },
+        {
+          path: '/latevisit',
+          name: 'LateVisit',
+          component: LateVisit
         },
         {
           path: '/hostoryquery',

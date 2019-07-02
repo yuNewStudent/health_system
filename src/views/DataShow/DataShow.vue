@@ -14,7 +14,7 @@
         </div>
       </el-col>
       <el-col :span="12">
-        <map-view></map-view>
+        <map-view class="map_wrapper"></map-view>
         <div class="middle_info">
           <el-select v-model="value" placeholder="请选择服务中心">
             <el-option
@@ -158,6 +158,10 @@ export default {
       line-height: 40px;
       font-weight:bold;
     }
+  }
+  .map_wrapper {
+    position: relative;
+    height: 500px;
   }
   .middle_info {
     .el-select {

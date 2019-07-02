@@ -10,28 +10,28 @@
             :value="item.value">
           </el-option>
         </el-select>
-        <el-select size="large" v-model="value" clearable placeholder="中心负责人">
+        <!-- <el-select size="large" v-model="value" clearable placeholder="中心负责人">
           <el-option
             v-for="item in options"
             :key="item.value"
             :label="item.label"
             :value="item.value">
           </el-option>
-        </el-select>
+        </el-select> -->
       </div>
       <div class="btns">
-        <div class="import">
+        <!-- <div class="import">
           <img src="@/assets/img/cust/新建IC.png" alt="" style="width: 20px">
           <span>新建</span>
-        </div>
-        <div class="import">
+        </div> -->
+        <div class="import" @click='isShowshowDistributionMap=!isShowshowDistributionMap'>
           <img src="@/assets/img/cust/分布地图IC.png" alt="" style="width: 20px">
           <span>分布地图</span>
         </div>
-        <div class="import">
+        <!-- <div class="import">
           <img src="@/assets/img/cust/导入ic .png" alt="">
           <span>导入</span>
-        </div>
+        </div> -->
         <div class="export">
           <img src="@/assets/img/cust/导出IC.png" alt="">
           <span>导出</span>
@@ -67,6 +67,11 @@
         </el-table-column>
         <el-table-column
           prop="address"
+          label="中心负责人"
+          show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+          prop="address"
           label="服务中心人数">
         </el-table-column>
         <el-table-column
@@ -84,14 +89,9 @@
           label="回访人"
           show-overflow-tooltip>
         </el-table-column>
-        <el-table-column
-          prop="address"
-          label="中心负责人"
-          show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column
+        <!-- <el-table-column
           label="操作">
-        </el-table-column>
+        </el-table-column> -->
       </el-table>
       <el-pagination
         @current-change="handleCurrentChange"
@@ -101,17 +101,34 @@
         layout="total, prev, pager, next, jumper"
         :total="customers.length"></el-pagination>
     </el-main>
+    <distribution-map
+      v-if='isShowshowDistributionMap'
+      @closeDistributionMap='isShowshowDistributionMap=!isShowshowDistributionMap'></distribution-map>
   </div>
 </template>
 
 <script>
+import DistributionMap from '@/components/StatisticalSummary/distribution-map'
 export default {
   components: {
+    DistributionMap
   },
   data () {
     return {
       query: '',
       customers: [],
+      value: '',
+      options: [
+        {
+          label: '服务中心A',
+          value: 'A'
+        },
+        {
+          label: '服务中心B',
+          value: 'B'
+        }
+      ],
+      isShowshowDistributionMap: false,
       // 分页
       currentPage: 1,
       paginationData: [],
@@ -120,6 +137,8 @@ export default {
   },
   computed: {},
   methods: {
+    // 选择器修改
+    handleSelectionChange () {},
     // 翻页
     handleCurrentChange () {},
     // 修改table header的背景色
@@ -168,6 +187,7 @@ export default {
       display: block;
       float: right;
       > div {
+        cursor: pointer;
         display: inline-block;
         height: 40px;
         background: #ED2839;
